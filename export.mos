@@ -1,0 +1,5 @@
+loadFile("pendulum.mo");getErrorString();
+
+// translateModelFMU(InvertedPendulum, fmuType = "cs"); getErrorString();
+setCommandLineOptions("--fmiFlags=s:cvode");getErrorString();
+buildModelFMU(InvertedPendulum, version = "2.0", fmuType="cs");getErrorString();
