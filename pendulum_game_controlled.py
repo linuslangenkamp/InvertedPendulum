@@ -268,18 +268,16 @@ class Controller(ABC):
 
 # override controller with simple controller
 class SimpleController(Controller):
-    K_PHI = 40.25
-    K_VPHI = 61.803398
-    K_S = 0.0
-    K_V = 0.0
+    K_PHI = 25
+    K_VPHI = 20
     MAX_TAU = 10.0
 
     def compute(self, phi_fmu, vphi, s, v):
         # Upright is phi = pi; normalize error around that
-        phi_err = (phi_fmu - math.pi + math.pi) % (2 * math.pi) - math.pi
+        phi_err = ((phi_fmu) % (2 * math.pi) - math.pi)
 
         tau = -(
-            +self.K_PHI * phi_err + self.K_VPHI * vphi + self.K_S * s + self.K_V * v
+            +self.K_PHI * phi_err + self.K_VPHI * vphi
         )
 
         return max(-self.MAX_TAU, min(self.MAX_TAU, tau))
